@@ -7,12 +7,12 @@
     </header>
     <main>
       <ul>
-        <li v-for="option in optionsNav" :key="option.name" @click="updateCurrentRoute(option.route)">
+        <li v-for="option in optionsNav" :key="option.name" >
           <router-link
             :style="option.route === currentRoute ? 'text-decoration: underline;' : ''"
             :to="option.route"
           >
-            {{ option.name }}
+            <span @click="updateCurrentRoute(option.route)">{{ option.name }}</span>
           </router-link>
         </li>
       </ul>
