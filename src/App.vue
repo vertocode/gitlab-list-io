@@ -1,7 +1,11 @@
 <template>
-  <v-app>
-    <NavBar />
-    <router-view />
+  <v-app class="app">
+    <nav-bar />
+    <div class="container-main">
+      <v-card>
+        <router-view />
+      </v-card>
+    </div>
   </v-app>
 </template>
 
@@ -19,3 +23,12 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.app {
+  .container-main {
+    width: 70%;
+    margin: auto;
+  }
+}
+</style>
