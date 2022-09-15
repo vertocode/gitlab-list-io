@@ -3,7 +3,9 @@
     <nav-bar />
     <div class="container-main">
       <v-card>
-        <router-view />
+        <div class="container-card">
+          <router-view />
+        </div>
       </v-card>
     </div>
   </v-app>
@@ -29,6 +31,9 @@ export default {
   .container-main {
     width: 70%;
     margin: auto;
+    .container-card {
+      padding: 30px;
+    }
   }
 }
 </style>
