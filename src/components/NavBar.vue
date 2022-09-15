@@ -1,23 +1,43 @@
 <template>
-  <div class="navbar">
+  <v-theme-provider root>
+    <div class="navbar">
     <header>
       <div class="img-container">
-        <img src="../assets/gitlab.webp" alt="GitLab" height="100px">
+        <v-row class="ma-5">
+          <v-col cols="4">
+            <div>
+              <img src="../assets/gitlab.webp" alt="GitLab" height="100px">
+            </div>
+          </v-col>
+          <v-col cols="4">
+            <main>
+              <ul>
+                <li v-for="option in optionsNav" :key="option.name" >
+                  <router-link
+                    :style="option.route === currentRoute ? 'text-decoration: underline;' : ''"
+                    :to="option.route"
+                  >
+                    <span @click="updateCurrentRoute(option.route)">{{ option.name }}</span>
+                  </router-link>
+                </li>
+              </ul>
+            </main>
+          </v-col>
+          <v-col cols="4">
+            <div class="theme-switch float-end">
+              <v-switch
+                v-model="$vuetify.theme.dark"
+                :prepend-icon="themeIcon"
+                hide-details
+                inset
+              />
+            </div>
+          </v-col>
+        </v-row>
       </div>
     </header>
-    <main>
-      <ul>
-        <li v-for="option in optionsNav" :key="option.name" >
-          <router-link
-            :style="option.route === currentRoute ? 'text-decoration: underline;' : ''"
-            :to="option.route"
-          >
-            <span @click="updateCurrentRoute(option.route)">{{ option.name }}</span>
-          </router-link>
-        </li>
-      </ul>
-    </main>
-  </div>
+    </div>
+  </v-theme-provider>
 </template>
 
 <script>
@@ -40,6 +60,11 @@ export default {
       ]
     }
   },
+  computed: {
+    themeIcon () {
+      return this.$vuetify.theme.dark ? 'mdi-weather-night' : 'mdi-brightness-6'
+    }
+  },
   methods: {
     updateCurrentRoute (route) {
       console.log(route)
@@ -51,18 +76,12 @@ export default {
 
 <style lang="scss">
 .navbar {
-  background-color: aliceblue;
   header {
-    display: flex;
     .img-container {
       margin: auto;
-      img {
-        margin-left: 1rem
-      }
     }
   }
   main {
-    width: 100%;
     display: flex;
   }
   ul {
@@ -80,7 +99,6 @@ export default {
       margin: auto 20px;
       a {
         font-family: "Droid Sans Mono", serif;
-        color: black;
       }
     }
   }

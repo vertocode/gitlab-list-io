@@ -29,7 +29,8 @@ export default {
 <style lang="scss">
 .app {
   .container-main {
-    width: 70%;
+    height: 75%;
+    width: 800px;
     margin: auto;
     .container-card {
       padding: 30px;
