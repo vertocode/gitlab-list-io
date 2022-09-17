@@ -17,19 +17,28 @@
         name="input-7-4"
         label="Description of your project"
       ></v-textarea>
-      <v-row class="date-fields">
-        <v-col>
-          <date-field
-            label="Project start date"
-            @saveDate="setDate"
-            date-key="initialDate"
-          />
+      <v-row>
+        <v-col cols="8">
+          <v-row class="date-fields">
+            <v-col>
+              <date-field
+                label="Project start date"
+                @saveDate="setDate"
+                date-key="initialDate"
+              />
+            </v-col>
+            <v-col>
+              <date-field
+                label="Project end date"
+                @saveDate="setDate"
+                date-key="endDate"
+              />
+            </v-col>
+          </v-row>
         </v-col>
-        <v-col>
-          <date-field
-            label="Project end date"
-            @saveDate="setDate"
-            date-key="endDate"
+        <v-col class="mb-2">
+          <user-field
+            :items="userItems"
           />
         </v-col>
       </v-row>
@@ -39,6 +48,7 @@
 
 <script>
 import DateField from '@/components/DateField'
+import UserField from '@/components/UserField'
 
 export default {
   name: 'Register',
@@ -53,17 +63,24 @@ export default {
         description: '',
         initialDate: '',
         endDate: ''
-      }
+      },
+      userItems: []
     }
   },
   components: {
-    DateField
+    DateField,
+    UserField
   },
   methods: {
     setDate (payload) {
       const { date, dateKey } = payload
       this.projectInfo[dateKey] = date
     }
+  },
+  created () {
+    setTimeout(() => {
+      this.userItems.push('vertocode')
+    }, 3000)
   }
 }
 </script>

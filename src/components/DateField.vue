@@ -78,7 +78,7 @@ export default {
   .date-fields {
     .date-field {
       width: max-content;
-      margin: auto;
+      margin-top: 14px;
     }
   }
 }
