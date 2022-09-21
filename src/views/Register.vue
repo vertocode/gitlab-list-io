@@ -38,7 +38,8 @@
         </v-col>
         <v-col class="mb-2">
           <user-field
-            :items="userItems"
+            :items="userDataSourceAPI.items"
+            @search="searchUser"
           />
         </v-col>
       </v-row>
@@ -49,11 +50,14 @@
 <script>
 import DateField from '@/components/DateField'
 import UserField from '@/components/UserField'
+import api from '@/mockData/api'
+import { UserDataSourceAPI } from '@/PageObjects/UserDataSourceAPI.js'
 
 export default {
   name: 'Register',
   data () {
     return {
+      userDataSourceAPI: new UserDataSourceAPI(api),
       nameRules: [
         v => !!v || 'Project Name is required',
         v => (v && v.length <= 30) || 'Name must be less than 30 characters'
@@ -64,7 +68,29 @@ export default {
         initialDate: '',
         endDate: ''
       },
-      userItems: []
+      userItems: [
+        'test',
+        'test2',
+        'test3',
+        'test4',
+        'test5',
+        'test6',
+        'test7',
+        'test8',
+        'test9',
+        'test0',
+        'test11',
+        'test22',
+        'test33',
+        'test44',
+        'test55',
+        'test66',
+        'test77',
+        'test88',
+        'test99',
+        'test00',
+        'test32'
+      ]
     }
   },
   components: {
@@ -75,12 +101,10 @@ export default {
     setDate (payload) {
       const { date, dateKey } = payload
       this.projectInfo[dateKey] = date
+    },
+    searchUser (user) {
+      this.userDataSourceAPI.searchUser(user)
     }
-  },
-  created () {
-    setTimeout(() => {
-      this.userItems.push('vertocode')
-    }, 3000)
   }
 }
 </script>

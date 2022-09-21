@@ -7,6 +7,7 @@
     deletable-chips
     multiple
     label="Users"
+    :search-input.sync="input"
   >
     <template v-slot:append-item v-if="items.length === 0">
       <v-list-item>
@@ -22,10 +23,20 @@
 <script>
 
 export default {
+  data () {
+    return {
+      input: ''
+    }
+  },
   props: {
     items: {
       type: Array,
       required: true
+    }
+  },
+  watch: {
+    async input (value) {
+      this.$emit('search', value)
     }
   }
 }
