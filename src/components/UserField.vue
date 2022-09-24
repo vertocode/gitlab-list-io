@@ -6,7 +6,8 @@
     clearable
     deletable-chips
     multiple
-    label="Users"
+    label="Users *"
+    :rules="[users => users.length || 'At least 1 user added is required']"
     :search-input.sync="input"
   >
     <template v-slot:append-item v-if="items.length === 0">
