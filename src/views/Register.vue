@@ -1,7 +1,7 @@
 <template>
   <div class="register">
     <h1 class="text-md-center">Register your new GitLab project here!</h1>
-    <v-form>
+    <v-form v-model="isFormValid">
       <v-text-field
         v-model="projectInfo.name"
         class="mb-5"
@@ -43,6 +43,14 @@
           />
         </v-col>
       </v-row>
+      <div class="controls">
+        <v-btn
+          width="100%"
+          :disabled="!isFormValid"
+          :loading="loadingRegister"
+          @click="registerProject"
+        >Register</v-btn>
+      </div>
     </v-form>
   </div>
 </template>
@@ -57,6 +65,8 @@ export default {
   name: 'Register',
   data () {
     return {
+      isFormValid: false,
+      loadingRegister: false,
       userDataSourceAPI: new UserDataSourceAPI(api),
       nameRules: [
         v => !!v || 'Project Name is required',
@@ -67,30 +77,7 @@ export default {
         description: '',
         initialDate: '',
         endDate: ''
-      },
-      userItems: [
-        'test',
-        'test2',
-        'test3',
-        'test4',
-        'test5',
-        'test6',
-        'test7',
-        'test8',
-        'test9',
-        'test0',
-        'test11',
-        'test22',
-        'test33',
-        'test44',
-        'test55',
-        'test66',
-        'test77',
-        'test88',
-        'test99',
-        'test00',
-        'test32'
-      ]
+      }
     }
   },
   components: {
@@ -104,6 +91,11 @@ export default {
     },
     searchUser (user) {
       this.userDataSourceAPI.searchUser(user)
+    },
+    registerProject () {
+      // TODO Implement after, not time now.
+      this.loadingRegister = true
+      console.log('Yet not implemented the register, without time for me now.')
     }
   }
 }
