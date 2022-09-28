@@ -92,10 +92,16 @@ export default {
     searchUser (user) {
       this.userDataSourceAPI.searchUser(user)
     },
-    registerProject () {
+    async registerProject () {
       // TODO Implement after, not time now.
       this.loadingRegister = true
-      console.log('Yet not implemented the register, without time for me now.')
+      try {
+        await this.$store.commit('addProject', this.projectInfo)
+        window.location.href = '/list'
+      } catch (error) {
+        throw new Error(error)
+      }
+      this.loadingRegister = false
     }
   }
 }
