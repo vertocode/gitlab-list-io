@@ -47,7 +47,7 @@ export default {
 
   data () {
     return {
-      currentRoute: window.location.pathname,
+      currentRoute: this.$route.path,
       optionsNav: [
         {
           name: 'Register',
@@ -67,7 +67,6 @@ export default {
   },
   methods: {
     updateCurrentRoute (route) {
-      console.log(route)
       this.currentRoute = route
     }
   }

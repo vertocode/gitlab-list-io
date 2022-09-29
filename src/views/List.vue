@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <div>
     <v-card-title>
       <v-text-field
         v-model="search"
@@ -14,7 +14,7 @@
       :items="projects"
       :search="search"
     ></v-data-table>
-  </v-card>
+  </div>
 </template>
 
 <script>

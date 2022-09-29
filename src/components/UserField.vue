@@ -8,7 +8,9 @@
     multiple
     label="Users *"
     :rules="[users => users.length || 'At least 1 user added is required']"
+    @input="this.$emit('input', $event)"
     :search-input.sync="input"
+    v-model="value"
   >
     <template v-slot:append-item v-if="items.length === 0">
       <v-list-item>
@@ -26,7 +28,8 @@
 export default {
   data () {
     return {
-      input: ''
+      input: '',
+      value: []
     }
   },
   props: {
@@ -38,6 +41,9 @@ export default {
   watch: {
     async input (value) {
       this.$emit('search', value)
+    },
+    async value (value) {
+      console.log(value, 'VALOR')
     }
   }
 }

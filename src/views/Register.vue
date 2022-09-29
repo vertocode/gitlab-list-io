@@ -38,8 +38,10 @@
         </v-col>
         <v-col class="mb-2">
           <user-field
+            v-model="this.projectInfo.users"
             :items="userDataSourceAPI.items"
             @search="searchUser"
+            @input="console.log($event)"
           />
         </v-col>
       </v-row>
@@ -76,7 +78,8 @@ export default {
         name: '',
         description: '',
         initialDate: '',
-        endDate: ''
+        endDate: '',
+        users: []
       }
     }
   },
@@ -97,7 +100,7 @@ export default {
       this.loadingRegister = true
       try {
         await this.$store.commit('addProject', this.projectInfo)
-        window.location.href = '/list'
+        await this.$router.push('/list')
       } catch (error) {
         throw new Error(error)
       }
