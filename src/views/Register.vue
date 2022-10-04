@@ -36,12 +36,13 @@
             </v-col>
           </v-row>
         </v-col>
-        <v-col class="mb-2">
+        <v-col>
           <user-field
+            class="mt-4"
             v-model="this.projectInfo.users"
             :items="userDataSourceAPI.items"
             @search="searchUser"
-            @input="console.log($event)"
+            @setUser="setUser"
           />
         </v-col>
       </v-row>
@@ -77,7 +78,7 @@ export default {
       projectInfo: {
         name: '',
         description: '',
-        initialDate: '',
+        initialDate: new Date().toLocaleString().split(',')[0],
         endDate: '',
         users: []
       }
@@ -90,10 +91,14 @@ export default {
   methods: {
     setDate (payload) {
       const { date, dateKey } = payload
-      this.projectInfo[dateKey] = date
+      this.projectInfo[dateKey] = new Date(date).toLocaleString().split(',')[0]
     },
     searchUser (user) {
       this.userDataSourceAPI.searchUser(user)
+    },
+    setUser (users) {
+      console.log(users, 'here')
+      this.projectInfo.users = users
     },
     async registerProject () {
       // TODO Implement after, not time now.

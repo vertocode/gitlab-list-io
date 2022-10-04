@@ -1,14 +1,13 @@
 <template>
   <v-autocomplete
     class="user-field"
-    :items="items"
+    :items="allItems"
     chips
-    clearable
+    dense
     deletable-chips
     multiple
     label="Users *"
-    :rules="[users => users.length || 'At least 1 user added is required']"
-    @input="this.$emit('input', $event)"
+    :rules="[Boolean(value.length) || 'At least 1 user added is required']"
     :search-input.sync="input"
     v-model="value"
   >
@@ -38,12 +37,17 @@ export default {
       required: true
     }
   },
+  computed: {
+    allItems () {
+      return [...this.items, ...this.value]
+    }
+  },
   watch: {
     async input (value) {
       this.$emit('search', value)
     },
     async value (value) {
-      console.log(value, 'VALOR')
+      this.$emit('setUser', value)
     }
   }
 }

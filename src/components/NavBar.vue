@@ -14,7 +14,6 @@
               <ul>
                 <li v-for="option in optionsNav" :key="option.name" >
                   <router-link
-                    :style="option.route === currentRoute ? 'text-decoration: underline;' : ''"
                     :to="option.route"
                   >
                     <span @click="updateCurrentRoute(option.route)">{{ option.name }}</span>
@@ -75,9 +74,11 @@ export default {
 
 <style lang="scss">
 .navbar {
+  margin-top: -25px;
   header {
     .img-container {
       margin: auto;
+      background-color: var(--v-accent-base);
     }
   }
   main {

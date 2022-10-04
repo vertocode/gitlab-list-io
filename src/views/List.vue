@@ -13,7 +13,18 @@
       :headers="headers"
       :items="projects"
       :search="search"
-    ></v-data-table>
+    >
+      <template v-slot:item.users="{ item }">
+        <ul>
+          <li v-for="user in item?.users" :key="user">
+            {{ user }}
+          </li>
+        </ul>
+      </template>
+      <template v-slot:item.delete="{ item }">
+        <v-btn color="error" @click="deleteProject(item)">Delete</v-btn>
+      </template>
+    </v-data-table>
   </div>
 </template>
 
@@ -30,11 +41,20 @@ export default {
           align: 'start',
           value: 'name'
         },
+        {
+          text: 'User(s)',
+          value: 'users'
+        },
         { text: 'Start date', value: 'initialDate' },
         { text: 'End date', value: 'endDate' },
-        { text: 'Users', value: 'users' }
+        { value: 'delete' }
       ],
       projects: this.$store.state.projects
+    }
+  },
+  methods: {
+    deleteProject (project) {
+      this.$store.commit('deleteProject', project)
     }
   }
 }

@@ -8,7 +8,6 @@ export class UserDataSourceAPI {
   first = 5
 
   async searchUser (user) {
-    console.log(user, 'user')
     const query = `query GetUsers($search: String) {
       users(search: $search, first: ${this.first}) {
         pageInfo {
@@ -30,7 +29,6 @@ export class UserDataSourceAPI {
     }).then(res => {
       const { nodes } = res.data.data.users
       this.items = nodes.map(user => user.username)
-      console.log(this.items)
     })
   }
 }
